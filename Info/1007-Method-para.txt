@@ -1,0 +1,171 @@
+Method parameters 
+==================
+
+ 1. Passed/called value parameter -- default parameter in C# is "called
+                                     by value".
+
+ 2. Reference parameter -- "out" and "ref" keyword create reference
+			  parameter.
+
+
+
+  The "out" parameter must be definitaly assigned within the method   call where as "ref" parameter is optional.
+
+
+
+Ex:
+
+
+#region Method Parameters
+class MethorPara
+{
+    static void CalledByValue(int n)
+    {
+        n = 10;
+    }
+    static void CalledByOut(out int n)
+    {
+        // n++ -- wont compile because value of "out" parameter
+        //         is not available in method body.
+        n = 10;
+    }
+    static void CalledByRef(ref int n)
+    {
+        n++;   //OK
+        n = 100;
+    }
+    static void Main()
+    {
+        int i = 1;
+        CalledByValue(i);
+        Console.WriteLine(i);
+
+        CalledByOut(out i);
+        Console.WriteLine(i);
+        CalledByRef(ref i);
+        Console.WriteLine(i);
+
+    }
+}
+#endregion
+
+
+String to simple type (Parse string datavalue to simple types)
+===============================================================
+
+Simple types have Parse, TryParse and TryParseExact methods which parse string value.
+
+ You can find "helper" methods of "Parse" in System.Convert class.
+
+
+Parse() and Convert.Toxxxx() method
+
+  string str = null;
+  int no = Convert.ToInt32(str); 
+   Console.WriteLine(no);
+
+   Convert.ToXXX() method returns default value if "param" is null,    returns int.Parse() result otherwise.
+
+Or you can use Parse()
+
+   String str = "192";     // will be failed when value is non-digit
+   int no = int.Parse(str);                           & null
+   
+
+TryParse() method
+------------------
+It handles "exception" implicitly.
+
+            string  str = null;
+            int no;
+
+            if (int.TryParse(str, out no))
+                Console.WriteLine(no);
+            else
+                Console.WriteLine("Invalid " + no);
+
+
+DateTime.TryParseExact() -- To parse string by settings "formats" and "culture".
+
+
+  string str = "21.12.2003";
+  
+  string[] formats = { 
+            "dd-MM-yyyy","d-M-yyyy","dd/MM/yyyy","dd.MM.yyyy"
+              };
+
+  DateTime date;
+
+  if (DateTime.TryParseExact(str, 
+       formats, 
+       System.Globalization.CultureInfo.InvariantCulture,        System.Globalization.DateTimeStyles.None, out date))
+                Console.WriteLine(date);
+            else
+                Console.WriteLine("Invalid date format");
+
+
+ToString(format) --- Simple Types to string
+================================================
+
+ int amount = 100000;
+
+  Console.WriteLine(amount.ToString("N")); // Number format with 2
+					   // digits decimal
+
+  Console.WriteLine(amount.ToString("C")); // Currency format with 2
+					   // digits decimal
+    Console.WriteLine(amount.ToString("N4")); // Number format with 4
+					   // digits decimal
+
+ Use 0 # and , to set custom format.
+
+ Console.WriteLine(amount.ToString("##,###.00"));
+
+
+DateTime format 
+===============
+d	- day of month
+dd	- two digit day
+ddd	- abbr day name
+dddd	- full day name
+M	- Month year or month of year
+MM	- two digit month no
+MMM	- Abbr month name
+MMMM	- Full month name
+y	- year or year month
+yy      - two digit
+yyy	- four digit
+
+hh	- 12 hour
+HH	- 24 hour
+mm	- min
+ss	- sec
+
+tt	- AM/PM
+
+
+params operator
+====================================================
+To create variable length parameter of one dimensional array.
+
+class Test
+{
+   static int sum(params int []nos) 
+     {
+         int total =0;
+         for(int i=0;i<nos.Length;i++)
+             {
+              total = total + nos[i];
+              }
+         return total;
+       }
+    static void Main()
+     {
+         Console.WriteLine(sum(10,20,30));
+         Console.WriteLine(sum());
+         Console.WriteLine(sum(10,20,30,66,77));
+         Console.WriteLine(sum(new int[]{1,2,3}));
+      }
+}
+       
+  

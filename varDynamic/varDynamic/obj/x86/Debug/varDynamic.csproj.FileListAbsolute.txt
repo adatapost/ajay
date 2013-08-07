@@ -1,0 +1,5 @@
+C:\csnet\Ajay\varDynamic\varDynamic\bin\Debug\varDynamic.exe
+C:\csnet\Ajay\varDynamic\varDynamic\bin\Debug\varDynamic.pdb
+C:\csnet\Ajay\varDynamic\varDynamic\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\csnet\Ajay\varDynamic\varDynamic\obj\x86\Debug\varDynamic.exe
+C:\csnet\Ajay\varDynamic\varDynamic\obj\x86\Debug\varDynamic.pdb

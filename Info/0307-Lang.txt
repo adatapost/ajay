@@ -1,0 +1,80 @@
+Console Application Project Template
+=======================================
+
+To learn C# language from the scratch, VS introduced "Console App".
+
+    Console App will produce "executable assembly - .exe"
+    whenever we debug the application in VS environment.
+
+    In VS, any application can be build using :
+
+         1. Debug build configuration
+         2. Release build configuration
+
+     Debug build will be "default" choice and it will be      mandatory for application development. Once your application reaches in final stage, you can build your app in "Release" build.
+
+
+     [We'll discuss "build" in later sessions]
+
+
+What is project file ? (.csproj / .vbproj)
+------------------------------------------
+Project file is an XML doc also called "Build" config file which includes :
+
+    1. Assembly metadata (product name,version, type. guid         ,digital signature etc).     
+    2. .Net framework lib references
+    3. Compilation units (.cs program files), text doc,         resources etc.
+
+
+  [GUID : Global Unique Identifier]
+
+What about .sln (solution) file?
+-----------------------------------------
+In VS, we can open multiple projects in single screen/window and that is managed by "solution file". 
+
+It means .sln is group project file which contains location of projects folders and .csproj files.
+
+Every project must be created inside the solution file and in case, if solution is not exists then VS will create a new one automatically.
+
+IMPORTANT: Never edit .csproj file using extenal editors. The .csproj, once modified with improper settings, the VS cannot opens your project anymore. Use "Properties" icon or right mouse click on project name in solution explorer + properties to change the project configuration.
+
+
+
+What is an assembly?
+------------------------
+An assembly is a deployment unit of .net application/project. There are two major assembly types:
+
+   1. Executable (.exe) assembly -- which contains a       primary class ---- a class having an entry point
+      "main" method as following signature:
+
+
+         class YourClassName
+          {
+             static void Main() {}
+         //or
+             static void Main(String []args) {}
+         //or
+             static int Main() { ...; return 0;}
+         //or
+             static int Main(string []args) 
+              { ..; return 0;}   
+           }
+
+       The CLR needs an entry point method from "EXE"              assembly to launch the app.
+
+
+    2. DLL - Dynamic Link Library assembly --- which        contains pre-compiled TYPES definition and they cannot be read/used directly by the CLR instead these assembly are connected/linked to an executable assembly.
+
+ In other words, .exe assembly creates a "process" (new  process) where as .dll assembly uses the "process" and that's why dll assembly is called "in-process" assembly.
+
+      
+Compilation unit
+-------------------
+
+In general, .cs extension file is used to store "source" code and build tool will treat .cs file as "compile" build action. 
+
+ You can change build action of any file (or compilation   unit) 
+      1. Select File  + Properies (right mouse)
+
+
+   

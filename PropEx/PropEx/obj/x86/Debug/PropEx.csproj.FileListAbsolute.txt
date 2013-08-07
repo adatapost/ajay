@@ -1,0 +1,5 @@
+C:\csnet\Ajay\PropEx\PropEx\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\csnet\Ajay\PropEx\PropEx\bin\Debug\PropEx.exe
+C:\csnet\Ajay\PropEx\PropEx\bin\Debug\PropEx.pdb
+C:\csnet\Ajay\PropEx\PropEx\obj\x86\Debug\PropEx.exe
+C:\csnet\Ajay\PropEx\PropEx\obj\x86\Debug\PropEx.pdb

@@ -1,0 +1,58 @@
+Nullable types
+====================================
+In some cases where we need to store null to the Value Types -- especially while reading value from database result (cursor) of Allow null field.
+
+Nullable is structure which saves value of Value TYPE or null.
+
+To create nullable variables:
+
+  TypeName? varName;
+
+ for example,
+
+     int? no=null;  or  int? no = 10;
+
+ Nullable object has "Value" and "HasValue" property through which one can determine whether it represents "actual" value or null.
+
+           int? n = 10;
+            if(n.HasValue)
+               Console.WriteLine(n.Value);
+
+
+Coalesce ?? operator
+====================
+This operator compare an expression/value against the null and if it is null then it will examine next expression/value and so on.
+
+e.g
+
+  string first = null,
+         second = null,
+         third = "hello";
+
+  string result = first ?? second ?? third;
+  Console.WriteLine(result); //  hello
+
+  second = "hi";
+  result = second ?? third ?? first; //hi
+
+You can use coalesce operator with nullable types:
+
+            decimal? amount = 100.122m;
+            decimal value = amount ?? 0.0m;
+            Console.WriteLine(value); //100.122
+            amount = null;
+            decimal value = amount ?? 0.0m; // 0.0
+
+
+
+default operator
+====================================================
+ It returns default value of given "Type" reference.
+
+  for example,
+
+    int n = default(int); // returns 0
+
+    string name = default(string); // returns null
+
+  

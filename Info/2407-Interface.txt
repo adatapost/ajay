@@ -1,0 +1,193 @@
+Interface --- reference type
+=============================================================
+
+ Interface type will be used to :
+
+  1. Define the "protocol" or "standard"
+
+  2. Create closures (V-table pointers)
+ 
+  3. Hides the implementation
+
+Between class type and interface --- Implementation relationship exist.
+
+Between two interfaces --- Inheritance relationship exist.
+
+
+  Named parameters 
+  --------------------------------------------
+  
+       static void Test(int no, string name)
+        {
+        }
+        static void Main(string[] args)
+        {
+            Test(name: "Rajesh", no: 10);
+            Test(no: 20, name: "Rohan");
+        }
+   C# allow us to set parameter value by adding 
+
+         paramName: value, paramName1: value 
+
+                                   parameters
+
+ --------------------------------
+
+ Inheritance -- "is" relationship 
+
+ "English" is "Language"
+  MCQ is Question
+
+
+ Interface -- "like" relationship 
+
+ "Person" like "Doctor","Teacher","Student"
+
+
+interface Printer 
+{
+   void printToPrinter();
+}
+interface Screen
+{
+  void preview();
+}
+interface SpellCheck {
+}
+class Doc : Printer, Screen
+{
+}
+
+class WordDoc : Doc, SpellCheck {}
+class HtmlDoc : Doc {}
+
+Inheritance relationship between interfaces
+---------------------------------------------
+ interface User
+  {
+    void show();
+   }
+ interface Clerk : User
+  {
+    void add();
+   }
+ interface Admin : Clerk
+  {
+    void del();
+    void update();
+   }
+
+ interface Schedule
+  {
+     void set();
+     void unset();
+   }
+
+ interface Super : Admin,Schedule //multiple inheritance
+ {
+    
+ }
+
+Explicit implementation of "interfaces"
+----------------------------------------------------------------
+
+What wil happen when two or more interfaces have same named method and these interfaces are implemented by a class?
+
+ e.g
+
+  interface Printer
+   {
+     void Print();
+    }
+   interface Screen
+    {
+      void Print();
+    }
+
+ class Doc : Printer, Screen
+{
+    public void Print()  // Common impl of Screen & Printer
+    {
+        Console.WriteLine("Common -- Printer/Screen");
+    }
+
+    //Following impl is called "Explicit" to add
+    //Type specific implementation.
+    //
+    // Explicit definition cannot allow access modifiers .i.e
+    // they are private but we can expose private impl with the
+    // help of "Interface" reference.
+    void Printer.Print()
+    {
+        Console.WriteLine("Printer::Print");
+    }
+    void Screen.Print()
+    {
+        Console.WriteLine("Screen::Print");
+    } 
+}
+
+class Test
+{
+    static void Main()
+    {
+        Doc c = new Doc();
+       // Explicit impl are not accessible by object reference.
+        c.Print();  //public impl.
+
+        //Cast object to Interface type to request private impl.
+        (c as Printer).Print();
+        (c as Screen).Print();
+        Printer printer = c;
+        Screen screen = c;
+
+        printer.Print();
+        screen.Print();
+    }
+}
+
+
+Callback or event delegation using "interface"
+===============================================================
+The class "Test" has "private" integer field called "no". We want to create notification system which will be raised whenever value of "no" field is updated.
+
+
+interface Message
+{
+    void Show(int old, int newValue);
+}
+class Test
+{
+    private int _no;
+    public Message Changed;
+
+    public int No
+    {
+        get { return _no; }
+        set
+        {
+            if (Changed != null)
+            {
+                Changed.Show(_no, value);
+            }
+            _no = value;
+        }
+    }
+}
+class TestMain
+{
+    static void Main()
+    {
+        Test test = new Test();
+        test.Changed = new MyMessage();
+        test.No = 10;
+        test.No = 50;
+    }
+}
+class MyMessage : Message
+{
+    public void Show(int old, int newValue)
+    {
+        Console.WriteLine(old + " value is replaced by " + newValue);
+    }
+}

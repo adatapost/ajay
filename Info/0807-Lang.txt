@@ -1,0 +1,188 @@
+Properties methods
+==================================================
+
+access  TypeName PropertyName
+{
+  get
+   {
+
+    }
+  set
+   {
+
+   }
+}
+
+The "TypeName" will be return type and parameter type of "PropertyName" method.
+
+
+ => get and set are called "accessors"
+ => get accessor always returns a value of the Type which     is specified at property declaration
+ => set accessor has an automatic (implicit) parameter     named "value".
+
+ => You can use either "get" or "set" or "both"     accessors with property definition.
+
+
+
+Auto-impelemented property
+---------------------------
+
+  syntax:
+ 
+   access TypeName PropertyName {get;set;}
+
+ The C# compiler will create a "field" and encapsulate it via property automatically (Thats why is is called uto-implemented )
+
+public class Student
+{
+  
+    public int Roll {get;set;}
+    public String Name {get;set;}
+    
+    public int Maths { get;set;}
+    public int Science { get;set;}
+
+    public int Total { get { return Maths + Science;}}
+}
+   
+
+Object initialization
+===============================
+
+  TypeName varName = new TypeName()
+    {
+      Property1 = value1,
+      .....
+     };
+
+  If "properties" are there (inside the class) then we can
+  init fields via above mentioned syntax.
+
+Example:
+
+public class Point
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+}
+public class Rect
+{
+    public Point Location { get; set; }
+    public Point Size { get; set; }
+}
+
+class MainApp
+{
+    static void Main()
+    {
+        Rect rect = new Rect()
+        {
+            Size = new Point() { X = 190, Y = 20 },
+            Location = new Point() { X = 100, Y = 200 }
+        };
+
+        Console.WriteLine(rect.Location.X + " " + rect.Location.Y);
+        Console.WriteLine(rect.Size.X + " " + rect.Size.Y);
+    }
+}
+
+var and dynamic keywords
+==========================================
+
+The "var" keyword is used to create "local" variables (it cannot be used as fields declarator or method parameters)
+
+ syntax:
+
+    var varName = value;
+
+  The "TypeName" of "varName" is assigned by C# compiler based upon the value type.
+
+   e.g
+
+       var no = 10; // int
+
+       var name = "Hello";
+
+       var obj = new Point();
+
+   It is important to note here that once we've created "var" variable, we cannot change its "type".
+
+       var no = 10; will be int forever but we can
+                    change the value
+           no++;
+           no = no + 2;
+
+
+dynamic
+========
+
+It will be used to create local vars, fields, method parameters and return type.
+
+The "dynamic" keyword allow us to change value and type of variable during program exeuction.
+
+ dynamic no;
+
+ no = 10; // int
+ no = "hello"; // string
+
+[Note: we can't have VS intelisense with dynamic vars because value and its type will be examined during the prog execution]
+
+
+
+Anonymous object
+==========================
+
+Syntax:
+
+ var varName = new
+   {
+     property1 = value,
+     property2 = value
+   };
+
+This feature allow us to bundle some values without creating a "class" or "array".
+
+
+ dynamic n = 10;
+            
+ var emp = new 
+      {
+    No = n,
+    Name = "Rajesh",
+     JoinDate = DateTime.Parse("12/31/2002")
+     };
+ Console.WriteLine(emp.No + " " + emp.Name + emp.JoinDate);
+
+
+Ex:
+
+ public class Subject
+    {
+        public string Name { get; set; }
+        public int TotalMarks { get; set; }
+    }
+    public class Exam
+    {
+        public Subject Subject { get; set; }
+        public string Date { get; set; }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Exam exam = new Exam()
+            {
+                Date = "1/1/2002",
+                Subject = new Subject()
+                {
+                     Name = "Maths",
+                      TotalMarks = 100
+                }
+            };
+
+
+            Exam exm = new Exam();
+            exm.Subject = new Subject()  { TotalMarks = 100, Name = "Eng" };
+            exm.Date = "1/1/2002";
+
+        }

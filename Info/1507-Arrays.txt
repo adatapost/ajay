@@ -1,0 +1,118 @@
+System.Array and its sub-types
+=============================================================
+
+Array in .net is an object (sub-type) of System.Array.
+
+To define an array :
+
+      DataType []arrayVar; //single dim
+      DataType [,]arrayVar; //two dim
+      DataType [,,]arrayVar; //three
+
+
+Or you can define an array of array
+ 
+      DataType [][]arrayVar; // One dim array whose elements are one
+			     // dim arrays
+
+      DataType [][,]arrayVar; //one dim array whose elements are two
+			      //dim arrays
+
+
+To create an array :
+
+   1. use "new" operator or
+   2. Array initializer 
+
+ 
+  Example :
+
+      int []nos = { 10, 20, 40}; // Initializer
+
+      int []nos = new int[3];    
+
+      int []nos = new int[3] { 10,20,30};
+
+
+      int [,]mat = { {10,20},{20,30}};
+
+      string  [][]cities;
+
+      cities = new string[3][];
+   
+      cities[0] = new string[] {"Meh","Patan","Raj"};
+      cities[1] = new string[10];
+      cities[2] = new string[3];
+
+
+Array methods & properties
+============================
+1. Rank - It returns value 1 if array is single dim
+			   2 if it is two dim and so on
+
+2. Length - It returns count of elements
+
+3. GetUpperBound(int dim)
+   GetLowerBound(int dim)  -- returns upper / lower bound of an array
+				of specified "dimension".     
+
+
+To traverse an array we've :
+
+  1. simple for loop ---- use Length, GetUpper/LowerBound() methods
+
+  2. foreach read-only loop - 
+
+       foreach(var varName in IEnumeratorObject) { }
+
+     foreach iterate any object whose TYPE has implemented the
+     System.Collections.ICollection and IEnumerator.
+
+For exmple,
+      String is "collection" of unicode chars and you'll find        GetEnumerator() method.
+
+      string name = "Hello";
+      foreach(var ch in name) 
+              Console.WriteLine(ch);
+
+  Or
+
+      IEnumerator e = name.GetEnumerator();
+      while(e.MoveNext())
+       {
+          Console.WriteLine(e.Current);
+        }
+
+  In case of array,
+
+      int []nos = {11,22,33};
+
+
+      IEnumerator e = nos.GetEnumerator();
+      while(e.MoveNext())
+       {
+          Console.WriteLine(e.Current);
+        }
+  Or
+      foreach(var no in nos) Console.WriteLine(no);
+
+4. GetValue(index) and SetValue(index,value) methods are used when
+   array object reference is assigned to System.Array reference    variable explicitly.
+
+    e.g
+
+      int []nos = { 10 , 20 ,30};
+
+      Array array = nos;  
+
+   //Now, we can't use subscript operator with "array" ref var
+    // array[0] = 10; is illegal
+
+     array.SetValue(0,10); //OK
+     Console.WriteLine(array.GetValue(0));
+
+5. Collections are never "thread-safe" (single object can be accessed     by two or more threads). It is developer's job that whether she/he
+    wants to create "Thread-safe" collection by implementing --     SyncRoot and IsSynchronized.
+
+
+  

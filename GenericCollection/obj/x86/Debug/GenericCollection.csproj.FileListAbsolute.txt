@@ -1,0 +1,4 @@
+c:\csnet\Ajay\GenericCollection\bin\Debug\GenericCollection.exe
+c:\csnet\Ajay\GenericCollection\bin\Debug\GenericCollection.pdb
+c:\csnet\Ajay\GenericCollection\obj\x86\Debug\GenericCollection.exe
+c:\csnet\Ajay\GenericCollection\obj\x86\Debug\GenericCollection.pdb

@@ -1,0 +1,86 @@
+What do you understood the term "FrameWork"?
+---------------------------------------------
+
+ Basically, a "framework" is programming environment either developed by open-source community or  a vendor to assist the developers. 
+
+With the help of "frameworks", we can develop an application as per "framework" constraints and "guideline".
+
+  
+
+ What is the ".net framework"?
+ -------------------------------
+
+   The ".net framework" is programming & execution (runtime) environment to develop, deploy and execute applications in a "highly   distributed environment of Internet".
+
+
+ In other words, the .net framework is collection of "services" which are installed upon the Operating system and .net services are mapped to the OS services.
+
+ The "programming framework" expose these .net framework services to the developers in form of "system-level" and "abstracted" class libraries.
+
+
+Three major components which constitutes the .net framework are : 
+
+    1. Common Language Infrastructure
+    2. Common Types System
+    3. Common Language Runtime
+
+
+ CLI
+ ===
+ 
+ It a "guideline" (or specification) for the developers, vendors (compiler vendors, APIs vendors etc) who want to use the .net framework. In fact, the .net framework is developed as per "CLI" guideline and we must have  know-how and understanding to work with .net framework.
+
+CTS  --  Common DataTYPE System
+===
+  
+     CTS TYPES system is designed using "Unified      Programming Model -- It is TYPE design method."
+
+     [Java, MFC (VC++) and other framework uses "Unified      Prog Model]
+
+     As per Unified Model:
+ 
+          > All TYPE must have one and only one direct
+            or immediate super-class.
+
+          > All TYPE must be created under the "named" package/namespace. i.e TYPES MUST be fully qualified.
+
+
+     
+     As per usage of TYPES, CTS falls into two groups:
+
+        1. Base class library : It includes system-level
+                                classes/TYPES.
+             e.g
+
+                1. Primitive TYPES
+                2. IO
+                3. Thread 
+                4. Socket/Network
+                5. Debug & Diagnostics
+                6. Text - Encoding
+                7. ADO.NET Providers
+                8. Globalization
+                9. Reflection & Runtime
+                   etc.
+
+        2. Extended class library : It includes application                    specific APIs.
+
+                 e.g 
+                  1. ASP.NET  - WebForm
+                  2. ASP.NET - MVC
+                  3. WinForm - Desktop App
+                  4. WPF  -    Desktop App
+                  5. WCF, WWF, WinPhone, XML, LINQ, etc
+
+
+                 
+                  
+
+ 
+
+
+
+
+
+
+

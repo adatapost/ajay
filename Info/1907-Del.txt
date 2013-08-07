@@ -1,0 +1,162 @@
+delegate type 
+==================================================
+
+ The "delegate" keyword define a delegate TYPE and instances of delegate type represent method (instance or static) reference along with "data" ---- this kind of representation is called "Closure".
+
+  Syntax to define delegate type
+  ----------------------
+
+   access  delegate return_type DelegateTypeName(parameters....);
+
+
+   We can store any method reference to the delegate type whose    signature is same as delegate type.
+
+ for example,
+
+    public delegate void SampleDel(int a,int b);
+
+
+   delegate type can store any method whose return type is "void" and    has two int parameters.
+
+public delegate void SampleDel(int a,int b);
+
+class Test
+{
+  static void add(int a,int b)
+    {
+      Console.WriteLine(a+b);
+     }
+   static void mul(int a,int b) { Console.WriteLine(a*b);}
+  
+  static void Main() 
+   {
+     //create delegate reference var
+
+      SampleDel action;
+
+      action = add; // assign method reference
+      
+      //invoke "add" method via "action" ref var
+
+       action(10,20);
+
+       action = mul;
+  
+        action(20,20);
+      }
+  }    
+
+
+Multicase -- add/remove two or more method references
+--------------------
+
+ Use += or -= operator with delegate type ref var to add or remove method reference respectively.
+
+  e.g
+
+    action+=add;
+    action+=mul;
+    action+=mul;
+    action(2,3); // will invoke add, mul ,mul
+    action-=add; // remove add method reference
+    action(5,3); // mul, mul
+
+Applications of delegate
+----------------------------
+1. To store method ref and pass or return it via method    parameter/return across the application.
+
+2. Define an event
+3. Create anonymous function or lambda expression
+    (a.k.a Functional programming)
+
+Anonymous method/function
+-----------------------------
+
+Syntax:
+
+ DelegateType refVar  = delegate(DataType param1,....)
+{
+   //method body
+ }; <----- Terminate the statement
+
+
+ Lambda  syntax:
+
+  DelegateType refVar = (param1,param2)=>
+    {
+        //method body
+    };
+  Or
+  //Single line statement
+
+  DelegateType refVar = (param1,param2) => statement;
+
+Example:
+
+public delegate void SampleDel(int a,int b);
+public delegate void TestDel();
+
+class Test
+{
+    static void Main()
+    {
+        SampleDel add = delegate(int x, int y)
+        {
+            Console.WriteLine(x + y);
+        };
+        SampleDel mul = delegate(int x, int y)
+        {
+            Console.WriteLine(x * y);
+        };
+
+        TestDel Line = () => Console.WriteLine("==============");
+        SampleDel Series = (no1, no2) =>
+        {
+            for (int i = no1; i <= no2; i++)
+            {
+                Console.WriteLine(i);
+            }
+        };
+        Line();
+        Series(3, 7);
+        Calc(add);
+        Calc(mul);
+    }
+    static void Calc(SampleDel task)
+    {
+        task(4, 5);
+    }
+    
+}
+
+
+WinFormApp
+=============
+1. Add "button1", button2 and checkbox1
+
+2. define two handlers
+
+ EventHandler goHome = (sa,ea) => MessageBox.Show("Home!!!");
+ EventHandler goOffice = (sa, ea) => MessageBox.Show("Office!!!");
+
+3. Code in form_load
+
+  private void Form1_Load(object sender, EventArgs e)
+   {
+    button1.MouseHover += (sa, ea) => button1.BackColor = System.Drawing.Color.Red;
+     button1.MouseLeave += (sa, ea) => button1.BackColor = System.Drawing.Color.Gray;
+
+     button2.Click += goHome;
+     button1.Click += goHome;
+
+    checkBox1.CheckedChanged += (sa, ea) =>
+       {
+         if (checkBox1.Checked)
+           {
+               button2.Click -= goHome;
+               button1.Click -= goHome;
+               button2.Click += goOffice;
+               button1.Click += goOffice;
+             }
+         };
+    }

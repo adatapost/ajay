@@ -1,0 +1,42 @@
+1. TYPES System (.NET FRAMEWORK)
+
+2. C# Language and TYPES (Class,interface,delegate,enum
+	and struct)
+
+3. Extension Methods
+
+4. Lambda Expression
+
+5. Threading, Debug & Diagnostics APIS
+
+6. Device IO, Binary Serialization/Deseralization
+
+7. XML - DOM, XML Serialization/Deseralization
+              
+8. Generic Or Parameterized TYPES - List<T>
+
+9. Collection Framework
+
+10. Language Integrated Query - Collection
+
+11. LINQ - SQL
+
+12. LINQ - XML
+
+13. Globalization & Resources
+
+14. Entity Data Model -- Database First
+15. EDM - Code First
+
+16. ASP.NET MVC 
+
+    1. Razor View Engine
+    2. Controllers
+    3. Filters
+    4. Authentication & Authrozation (SimpleMemberShip)
+    5. Areas
+    6. Crystal Report
+    7. jQuery
+
+
+

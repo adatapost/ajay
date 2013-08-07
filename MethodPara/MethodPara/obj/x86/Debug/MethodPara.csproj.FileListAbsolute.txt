@@ -1,0 +1,4 @@
+D:\Csnet\Ajay\MethodPara\MethodPara\bin\Debug\MethodPara.exe
+D:\Csnet\Ajay\MethodPara\MethodPara\bin\Debug\MethodPara.pdb
+D:\Csnet\Ajay\MethodPara\MethodPara\obj\x86\Debug\MethodPara.exe
+D:\Csnet\Ajay\MethodPara\MethodPara\obj\x86\Debug\MethodPara.pdb

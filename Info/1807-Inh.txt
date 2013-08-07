@@ -1,0 +1,186 @@
+How .net objects compared?
+==============================================
+
+By overrding the "Equals" method.
+
+In C#, use virtual keyword for the method that will be override by its sub-classes.
+
+       use "abstract" keyword for the method in superclass and in that
+	case this method must be "override" in sub-classes and if sub-classes failed to do so then they will become "abstract" classes.
+
+
+class A
+{
+   public virtual void First()
+    {
+      Console.WriteLine("First");
+     }
+   public virtual void Second()
+    {
+      Console.WriteLine("Second");
+     }
+   public void Third() {}
+}
+class B: A
+{
+}
+
+ B x = new B();
+
+ When we create an object, a v-table (virutal table ---- function pointer table of virtual & abstract methods) will be created,
+
+  Symbol |	Reference
+ ==========================
+   First |	A.First()
+   Second| 	A.Second()
+
+
+Now, override "First()" in class B 
+
+class B: A
+{
+
+ public override void First()
+   {
+      Console.WriteLine("First from B");
+    }
+}
+and the new v-table will be :
+
+ Symbol |	Reference
+ ==========================
+   First |	B.First()
+   Second| 	A.Second()
+
+
+  B x = new B();
+  x.First();        //B.First()
+
+  A y = x;
+  y.First();       //B.First()
+
+  (x as A) .First();  //B.First()
+
+
+Why we've to override super class methods?
+
+ Following are possible answers:
+    => We don't trust the super class implementation
+    => We don't want to use super class method 
+    => Super class method can not have ability to examine sub-class  methods or object so we need to re-write the code for sub-classes.
+
+Equals, ToString and GetHashCode of Object class are virtual methods and we should have to override them in order to compare the objects, dump the object value for debugging purpose etc.
+
+    
+public class Student
+{
+    public int Roll { get; set; }
+    public string Name { get; set; }
+ 
+    public override bool Equals(object obj)
+    {
+         Student refObj = obj as Student;
+         return Roll == refObj.Roll && Name.Equals(refObj.Name);
+    }
+    public override string ToString()
+    {
+        return Roll + " " + Name;
+    }
+}
+class Test
+{
+    static void Main()
+    {
+        Student s1 = new Student() {  Roll= 1, Name ="A"};
+        Student s2 = new Student() { Roll = 1, Name = "A" };
+        
+        if (s2.Equals(s1))
+            Console.WriteLine("Eq");
+        else
+            Console.WriteLine("Un");
+
+       //Array of objects
+        Student[] students =
+        {
+             new Student(){Roll = 1,Name ="R"},
+             new Student(){Roll = 2,Name ="Q"},
+             new Student(){Roll = 9,Name ="P"},
+        };
+
+        Console.WriteLine(Array.IndexOf(students, new Student(){ Roll=9,Name="P"}));
+
+        //Dump the object data using ToString()
+        foreach (var student in students)
+            Console.WriteLine(student);
+    }
+}
+
+hash
+=========================
+It is technique to produce "int" (or non-in) value from the "data/value".
+   
+  For instance, customer A/C no is hash of customer bank account
+
+In .net, hash technique is used to generate hash value from the data/value and further hash code is used to compare objects.
+
+Ex:
+
+  public override bool Equals(object obj)
+    {
+         return GetHashCode() == obj.GetHashCode();
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = 0;
+        hash = Roll.GetHashCode();
+        if (Name != null)
+            hash += Name.GetHashCode();
+        return hash;
+    }
+
+Array.sort(Array, sort_comp_method_implementation)
+-----------------------------------------------
+You can implement sort_comparision by implementing
+  1. System.Collection.IComparer
+  2. System.Collection.Generic.IComparer<T>
+  3. Comparision<T> delegate
+
+
+class ByRollGen : System.Collections.Generic.IComparer<Student>
+{
+    public int Compare(Student x, Student y)
+    {
+        return x.Roll - y.Roll;
+    }
+}
+class ByRoll : System.Collections.IComparer  //raw type and 
+{                                            //that's why not 
+    public int Compare(object x, object y)   //used commonly
+    {
+        return (x as Student).Roll - (y as Student).Roll;
+    }
+}
+class ByName : System.Collections.IComparer
+{
+    public int Compare(object x, object y)
+    {
+        return (x as Student).Name.CompareTo((y as Student).Name);
+    }
+}
+
+and code to sort an array elements:
+
+        Array.Sort(students, new ByRoll());
+        foreach (var student in students)
+            Console.WriteLine(student);
+    
+   // Delegate 
+
+ Comparision<Student> ByStudentName = (x,y)=> x.Name.CompareTo(y.Name);
+ Array.Sort(students, ByStudentName);
+
+ Array.Sort(students, (x,y)=>
+   {
+       return x.Roll - y.Roll;
+    });

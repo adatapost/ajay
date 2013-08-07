@@ -1,0 +1,4 @@
+c:\csnet\Ajay\CollectionExample\bin\Debug\CollectionExample.exe
+c:\csnet\Ajay\CollectionExample\bin\Debug\CollectionExample.pdb
+c:\csnet\Ajay\CollectionExample\obj\x86\Debug\CollectionExample.exe
+c:\csnet\Ajay\CollectionExample\obj\x86\Debug\CollectionExample.pdb

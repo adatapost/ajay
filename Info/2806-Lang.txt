@@ -1,0 +1,118 @@
+C# - The CLS Compliant Language
+=========================================
+
+
+ 1. C# is CLS (or ECMA) compliant programming language.
+    [C# compiler is designed as per Common Language      Specification or ECAM specification -- you can      download CLS/ECMA doc from microsoft site]
+
+ 2. C# is "strongly" typed or "statically" typed lang.
+
+ 3. C# version 4.0 and later, "dynamic" keyword is     introduced to add "dynamic language" ability.
+ 
+ 4. C# supports OOP and functional programming paradigm.
+
+ 5. C# allow us to write "un-managed" code. Un-managed is     the code that will be not controlled by the stack     services of "CLR".
+
+ 6. C# is case-sensitive.
+
+ 
+Variable's and value's type is examined by compiler/language is called "Strongly/Statically" typed lang.
+
+     In Java/C#,
+
+          String s = "10";
+
+             Type of "s" variable will be "String" forever.
+
+Dynamic language: Type of variable can be changed during program execution. Or value can select the "type" of variable.
+
+
+        In PHP/JavaScript,
+ 
+            $v = 10; //int
+            $v = "Hello"; //string
+
+
+Access control keywords
+==============================
+ 
+  1. Why we've to use "access-controls"?
+  
+
+       It creates an outline between creator of code and        user of code.      
+
+       We can protect an "object". (data abstraction)
+       We can hide complex code by creating methods --         (proc. abstraction)
+
+  C#, we've five access controls:
+
+   1. public
+   2. internal
+   3. private
+   4. protected
+   5. protected internal
+
+
+ Namespace, local variable, method parameters cannot allow  access modifiers.
+
+
+1. public : public entities have no restriction.
+2. internal : internal "entities" are only visible inside               the assembly/project. They are not visible
+              outside the assembly/project.
+
+3. private : priviate entities are visible inside the 
+             "containing type" in which they are               defined/created.
+
+4. protected : These entities are same as "private" but                they are visible in sub-class.
+
+5. protected internal : These entities are visible in      sub-classes outside the assembly/project.
+
+                
+
+TOP-LEVEL Types must have either "public" or "internal" access and if "modifier" is not specified then the default will be "internal".
+
+ [TOP-LEVEL TYPE means a type which is not created inside         another TYPE]     
+
+
+Here are example of TOP-LEVEL,
+
+class A {}
+public class B{}
+interface C {}
+
+class D
+ {
+    private class A{} <--- Nested (NOT TOP-LEVEL)
+  }
+
+Nested TYPES have following accessibility:
+
+ TypeName	Default		Can be changed
+--------------------------------------------------
+  class		private		private,public, protected,
+				internal,protected internal
+
+  interface	public		N.A
+  struct	private		private, public, internal
+  enum		public		N.A
+  delegate	   ---		---
+
+
+
+Variables
+====================
+
+1. Local variables : They are created when a method is called and discarded when method or block is terminated. Local var are declared inside the method or via method parameters.
+
+2. Instance & static Variable : These two types of variables are also called "data members" or "fields".
+
+    Static variable or field : The static field declared using "static" storage modifier, will be created whenever any of the member of that class/type is referenced very first time and remains in memory till an application is running.
+
+
+     Instance variable or field : Instance variables         composes an object. When we create an object invoking "new ClassName()" syntax, memory will be allocated for all "instance" variables.
+
+
+
+    
+
+

@@ -1,0 +1,161 @@
+Generic Collection is better choice over the "Raw" collection because we dont have to cast objects and also restrict the methods parameters by placing "Type" parametrers.
+
+
+
+Creating "Generic" collection
+------------------------------------
+1. We've to override 1) GetEnumerator() with Type parameter and
+                     2) GetEnumerator() raw type 
+
+ The raw type method will be implemented as "Explicit"
+
+e.g
+
+ class MyCollection : IEnumerable<T>
+  {
+     public IEnumerator<T> GetEnumerator()
+     {
+        ...  
+      }
+ 
+     //here is implementation of System.Collections.IEnumerator()
+
+     System.Collections.IEnumerator GetEnumerator() {}
+  }
+
+
+Example : Populate IEnumerable<int> from given collection & criteria.
+
+1. first of all define the "Predicate" delegate
+
+  public delegate bool Filter<T>(T value);
+
+2. 
+    //This method will returns all int elements wrapped into     //IEnumerable object.
+    static IEnumerable<int> GetInts()
+    {
+        int[] nos = { 11, 2, 4, 55, 66, 8, 55, 33, 44, 22 };
+        foreach (var t in nos)
+            yield return t;
+    }
+
+    //IEnumerable based upon given "Predicate"
+    static IEnumerable<int> GetInts(Filter<int> condition)
+    {
+        int[] nos = { 11, 2, 4, 55, 66, 8, 55, 33, 44, 22 };
+        foreach (var t in nos)
+        {
+            if(condition(t))
+               yield return t;
+        }
+    }
+    static void Main()
+    {
+        foreach (var t in GetInts())
+            Console.WriteLine(t);
+
+        Filter<int> above20 = (x) => x > 20;
+        Filter<int> between10And40 = (x) => x >= 10 && x <= 40;
+        Console.WriteLine("Above 20");
+        foreach (var t in GetInts(above20))
+            Console.WriteLine(t);
+        Console.WriteLine("10 to 40");
+        foreach (var t in GetInts(between10And40))
+            Console.WriteLine(t);
+    }
+
+Classes of Generic Collection
+----------------------------------------------------------------
+Generic & non-generic collection classes implements varities of "interfaces" and at top-level, the IEnumerable interface.
+
+Sub-interface of IEnumerable are :
+
+1. IList --- Represent "ordered" list of collection.
+
+2. ISet  --- Represent "unique" collection of elements.
+
+3. IDictionary -- Collection of "unique" key and value.
+
+
+List<T> class & its methods
+===============================================================
+
+Collection of strings:
+
+ List<string> cities = new List<string>()
+        {
+            "Meh","Pat","Raj","Sut"
+        };
+        cities.Add("Pal");
+        cities.Insert(0, "Vis");
+
+        Console.WriteLine(cities[0]);
+        Console.WriteLine(cities.Contains("Meh"));
+        Console.WriteLine(cities.Remove("Raj") ? "Removed" : "Not Exist");
+        
+        foreach (var city in cities)
+            Console.WriteLine(city);
+
+
+Collection of Student object
+----------------------------------------
+public class Student
+{
+    public int Roll { get; set; }
+    public string Name { get; set; }
+}
+
+//Collection of Student
+public class Students : List<Student> { }
+
+//Comparator is required when "Equals" and "GetHashCode" methods
+//are not overriden.  
+//List#Contains and List#Remove uses "Equals" method to search/remove //an element.
+public class StudentCompareByRoll : IEqualityComparer<Student>
+{
+    public bool Equals(Student x, Student y)
+    {
+        return x.Roll == y.Roll;
+    }
+
+    public int GetHashCode(Student obj)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+code in Main method:
+
+ //You can choose
+ //1. List<Student> students = new List<Student>();
+ //Or
+ //2. Students students = new Students() 
+ //   collection
+
+ Students students = new Students();
+ students.Add(new Student() { Roll = 10, Name = "Raj" });
+ students.Add(new Student() { Roll = 20, Name = "Man" });
+        
+ Student search = new Student() { Roll = 10, Name = "Raj" };
+ Console.WriteLine(students.Contains(search,
+                                new StudentCompareByRoll()));
+ students.Remove(search);
+ foreach (var t in students)
+        {
+            Console.WriteLine(t.Roll + " " + t.Name);
+        }
+
+class Category
+{
+    ID
+    Name
+    List<Product> Products
+}
+
+class Product
+{
+    ID
+    Name
+    Unit
+    Category category
+}

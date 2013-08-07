@@ -1,0 +1,5 @@
+C:\csnet\Ajay\SampleTwo\SampleTwo\bin\Debug\SampleTwo.exe
+C:\csnet\Ajay\SampleTwo\SampleTwo\bin\Debug\SampleTwo.pdb
+C:\csnet\Ajay\SampleTwo\SampleTwo\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\csnet\Ajay\SampleTwo\SampleTwo\obj\x86\Debug\SampleTwo.exe
+C:\csnet\Ajay\SampleTwo\SampleTwo\obj\x86\Debug\SampleTwo.pdb

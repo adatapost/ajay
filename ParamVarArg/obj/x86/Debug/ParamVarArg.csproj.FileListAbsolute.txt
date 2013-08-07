@@ -1,0 +1,4 @@
+D:\Csnet\Ajay\ParamVarArg\bin\Debug\ParamVarArg.exe
+D:\Csnet\Ajay\ParamVarArg\bin\Debug\ParamVarArg.pdb
+D:\Csnet\Ajay\ParamVarArg\obj\x86\Debug\ParamVarArg.exe
+D:\Csnet\Ajay\ParamVarArg\obj\x86\Debug\ParamVarArg.pdb

@@ -1,0 +1,138 @@
+class A
+{
+  public int a;
+
+  public A(int n) {}
+}
+
+class B : A
+{
+  public int a;
+
+}
+
+class Test
+{
+  static void Main()
+   {
+        B x = new B();
+ 
+        x.a = 10;
+
+        A y = x;
+        y.a = 20;
+
+        System.Console.WriteLine(x.a + " " + y.a);
+    }
+}
+
+How many objects will be created when we instantiate the "B" class?
+------------------------------------------------------------------
+ 3 - objects of   Object, A and B class
+
+
+base keyword 
+=====================
+To select super class constructor
+
+ Syntax:
+
+    public SubClassConstructor() : base() {}
+e.g
+
+  class Person{
+      int age;
+      string name;
+
+      public Person(int age,string name) {
+         this.age = age; this.name = name;
+      }
+  }
+ class  Employee : Person {
+    double salary;
+    public Employee(int age,string name,double salary)  : base(age,name){
+      this.salary = salary;
+     }
+  }
+
+The base keyword also used to invoke/use an "instance" method/member of super-class from within the sub-class's instance method.
+
+Note: We cannot use "base" in static methods.
+
+
+Hiding super/base class's members
+=============================================================
+If super-class member (field/method) name is re-declare in sub-classes then this event is called "hiding super-class member" or "shallow the members".
+
+e.g
+
+class A {
+    int a;
+}
+class B : A {
+    void a() {} <---- hides "int A.a"
+}
+class C : A{
+    double a; <--- Hides "int A.a"
+}
+
+The C# compiler generate warning when you hide super's members in sub-classes. To eliminate these warning, use "new" keyword with member definition in sub-class members. Purpose of "new" is --- "member is hidden intentially".
+
+Object casting -- Boxing and Unboxing
+==============================================================
+
+ Object casting means "selection" of an object from "sub-objects" i.e Super-sub class objects.
+
+
+  We can select an object from "sub-objects" implicitly using :
+   
+     SuperClass refVar  = new SubClass();
+
+  Or 
+   
+     Select an object via "super-class" reference  variable
+     by explicit type reference.
+
+     SubClass refVar = (SubClass) superRefVar;
+                         ^
+                         |--- Type Reference 
+
+
+      Above syntax will throws "InvalidCastException" when object
+      is not exists of given "Type Reference" into sub-objects.
+
+
+     You can use "as" operator to safe-cast (safe selection)
+
+         SubClass refVar = superRefVar as SubClass;
+
+        It returns ref of "SubClass" object if an object is exists
+        of specified "Type Reference", returns null otherwise.
+
+
+For example,
+
+   Object obj = new B();  // 3 sub-objects
+
+   A y = obj as A;  // or y = (A) obj;
+
+   //or
+
+  
+    (obj as A).a = 10;   //or  ((A)obj).a = 10;
+    (obj as B).a = 20;   //or  ((B)obj).a = 20;
+
+
+
+Example : Prepare "Question" list which contains objects of SCQ, MCQ, and blanks.
+
+class Question{
+    string question;
+}
+
+
+
+                         
+
+   
+   

@@ -1,0 +1,85 @@
+Based upon memory usage, TYPES are falls into two groups:
+
+  1. Value Types and
+  2. Reference Types
+
+
+ How memory (RAM) is used when we launch/start the app?
+ ---------------------------------------------------------
+  When we launch an app(program), the memory managers of concern "platform or os" allocate two memory regions per running application.
+
+  These two memory regions are called :
+
+         1. Stack Frame and
+         2. Heap Frame
+
+  The "size/length" of Stack Frame memory will be 1 MB (No more or less than 1MB). i.e each running application has 1 MB fixed memory to store "local variables", "method parameters", "return type" and for "method calls".
+
+  If we need more memory to store huge amount of data or we dont want to store data into "Stack Frame" then we must have to instruct the memory managers for "Heap Frame". A "Heap" is chunks of bytes that will be allocated when we  request the Memory Managers via "new" keyword or "malloc/alloc" in different environment/languages.
+
+
+  Value Types : Value types varible holds value of that specific type that they                 belongs to.
+                Value Types variable doesnot store "null".
+                Value Types are fixed lengh/size datatypes.
+
+                In CTS, struct and enum are example of Value TYPES.
+
+  Reference Types : Reference types variable hold memory reference of an object or                     null (in absense of an object).
+
+                    Reference variable's length/size will 4 bytes foreever.
+   
+                    In CTS, class, interface, delegate and array are example
+                     of Reference TYPES.
+
+     Value TYPES, if they are declared/created as "local varible", will uses "stack Frame" but if these Value TYPES are used as "fields" then they will uses "Heap" memory.
+
+     Reference TYPES always uses "Heap Frame".
+
+     [Note: In theory, a max size of an object will be 2 GB and you can extend by             adding switches to the runtime]
+
+
+ 
+Simple Types (Primitive Types)
+---------------------------------
+
+ Simple Types are "struct" or Value Types and all Simple Types are sub-class of  "System.ValueType" class and System.ValueType is sub-class of "System.Object".  Class "System.Object" is the ultimate super/base class of all CTS including user-defined TYPES.
+
+All "Simple" types uses alias in different CLS compliant languages and following is the list of "Simple Type" and their aliases in C#:
+
+ CTS Name		C# alias
+
+ System.Byte		byte
+ System.SByte		sbyte
+ System.Int16		short
+ System.Int32		int
+ System.Int64		long
+ System.UInt16		ushort (unsigned)
+ System.UInt32		uint (unsigned)
+ System.UInt64		ulong (unsigned)
+ System.Single		float
+ System.Double		double
+ System.Decimal		decimal (16 bytes)
+ System.Char		char  (2 bytes -- unicode)
+ System.Bool		bool
+ System.DateTime	System.DateTime
+ System.Timespan	System.Timespan 
+
+and following are two most commonly used reference types and their aliases:
+ 
+ System.String		string  (lowercase)
+ System.Object		object  (lowercase)
+
+So you can either choose "aliases" or CTS names interchangbly in C# code:
+
+    System.Int32 no = 10;
+       is equivalent to,
+    int no  = 10;
+
+
+
+
+ 
+ 
+     
+ 
+  

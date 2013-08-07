@@ -1,0 +1,47 @@
+const and readonly keywords
+================================================
+The "const" creates constant at the time of compilation where as
+"readonly" creates constant fields at the time of execuction of program -- especially after the execution of "constructor" of that class.
+
+Fields or local variables declared as "const" cannot use "static" modifier.
+
+
+Ex:
+class Maths
+{
+    public   const int VALUE = 10;
+    public readonly int MAX = 10;
+
+    public Maths(int max)
+    {
+        MAX = max;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(Maths.VALUE);
+
+        Maths maths = new Maths(902);
+        Console.WriteLine(maths.MAX);
+      //  maths.MAX = 29;
+    }
+}
+
+
+Set private or protected access to the "accessors" of property.
+----------------------------------------------------------------
+You can set private or protected access to either "get" or "set" but not both.
+
+ public int Roll {get;private set;}
+or
+ public int Roll {private get;set;}
+Or
+ public int Roll
+  {
+     private get
+      { ... }
+     set {}
+   }

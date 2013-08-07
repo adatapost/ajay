@@ -1,0 +1,22 @@
+How to create "Library" and how to use it into other projects?
+---------------------------------------------------
+
+1. Create "Empty Solution" (File + New Project + Other    Projects + Empty Solution)
+
+   save empty solution project to:
+
+     x:\MyApplication
+
+2. File + Add + Project + Library Project to
+
+     X:\MyApplication\MyLib
+
+3. File + Add + WebSite To
+
+     x:\MyApplication\Web
+
+4.  Build the "solution" and right mouse click on "Web"     project/website (Or choose WebSite/Project Menu) 
+    +  Add References + Select "Project" tab + OK
+
+    Now, in website, you'll notice the MyLib.dll will be     copied into "Bin".
+

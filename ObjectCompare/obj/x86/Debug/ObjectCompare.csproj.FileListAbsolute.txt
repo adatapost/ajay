@@ -1,0 +1,4 @@
+c:\csnet\Ajay\ObjectCompare\bin\Debug\ObjectCompare.exe
+c:\csnet\Ajay\ObjectCompare\bin\Debug\ObjectCompare.pdb
+c:\csnet\Ajay\ObjectCompare\obj\x86\Debug\ObjectCompare.exe
+c:\csnet\Ajay\ObjectCompare\obj\x86\Debug\ObjectCompare.pdb

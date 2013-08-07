@@ -1,0 +1,102 @@
+Collection Framework -- without and with Generic
+---------------------------------------------------------------
+
+The namespace "System.Collections" includes non-generic (raw or closed) interfaces, classes and delegates where as you will find "Generic" types at "System.Collections.Generic" namespace.
+
+[NOTE: Non-generic are for backward compatiblity of .net framework version 1.0 to 2.0].
+
+IEnumerable interface   : This interface define "iterator" behavior.
+----------------------
+
+Method "IEnumerator GetEnumerator()" returns an implementation of "IEnumerator".
+
+There are three ways to create "IEnumerator" object:
+
+  1. returns an instance of "IEnumerator" from existing    array/collection.
+  2. Define an implementation of "IEnumerator"
+      class MyIterator : IEnumerator { ....}
+
+  3. Use "yield return" keyword.
+
+
+Ex - 1
+class MyCollection : IEnumerable
+{
+    int[] no = { 11, 22, 33, 44 };
+    public IEnumerator GetEnumerator()
+    {
+        return no.GetEnumerator();
+    }
+}
+Ex - 2
+"yield return" will insert an element into anonymous object of IEnumerator and finally it returns that object reference.
+
+static IEnumerator SaySomething(){
+    yield return "One";
+    yield return "Two";
+}
+static void Main(){
+   IEnumerator e  = SaySomething();
+   while(e.MoveNext()){ 
+      Console.WriteLine(e.Current);
+   }
+}
+
+Ex:
+class MyCollection : IEnumerable
+{
+   .... 
+   public IEnumerator GetEnumerator(){
+      foreach(var e in no){
+        yield return e;
+       }
+    }
+}
+
+Ex - 3 -- Create IEnumrator by hand
+
+class MyCollectionInterface : IEnumerable
+{
+    int[] no = { 11, 22, 33, 44 };
+    public IEnumerator GetEnumerator()
+    {
+        return new MyEnumerator(no);
+    }
+    
+    private class MyEnumerator : IEnumerator
+    {
+        int[] no = null;
+        int index = -1;
+        public MyEnumerator(int[] no) { this.no = no; }
+        public object Current
+        {
+            get { return no[index]; }
+        }
+
+        public bool MoveNext()
+        {
+            index++;
+            if (index >= no.Length)
+                return false;
+            return true;
+        }
+
+        public void Reset()
+        {
+            index = -1;
+        }
+    }
+}
+
+Code in Main method:
+
+       MyCollectionXXXXX collection = new MyCollectionXXXXXX();
+        foreach (var t in collection)
+        {
+            int n =(int) t;
+            Console.WriteLine(n*n);
+        }
+    
+
+
+

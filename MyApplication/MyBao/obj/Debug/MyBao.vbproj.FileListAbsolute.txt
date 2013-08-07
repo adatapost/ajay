@@ -1,0 +1,10 @@
+C:\csnet\Ajay\MyApplication\MyBao\bin\Debug\MyBao.dll
+C:\csnet\Ajay\MyApplication\MyBao\bin\Debug\MyBao.pdb
+C:\csnet\Ajay\MyApplication\MyBao\bin\Debug\MyBao.xml
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\ResolveAssemblyReference.cache
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\MyBao.Resources.resources
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\GenerateResource.read.1.tlog
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\GenerateResource.write.1.tlog
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\MyBao.dll
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\MyBao.xml
+C:\csnet\Ajay\MyApplication\MyBao\obj\Debug\MyBao.pdb

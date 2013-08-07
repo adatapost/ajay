@@ -1,0 +1,4 @@
+D:\Csnet\Ajay\ParseString\ParseString\bin\Debug\ParseString.exe
+D:\Csnet\Ajay\ParseString\ParseString\bin\Debug\ParseString.pdb
+D:\Csnet\Ajay\ParseString\ParseString\obj\x86\Debug\ParseString.exe
+D:\Csnet\Ajay\ParseString\ParseString\obj\x86\Debug\ParseString.pdb

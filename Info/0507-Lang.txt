@@ -1,0 +1,255 @@
+using directive
+----------------
+
+"using" directive insert fully qualified name into code at the time of compilation.
+
+Syntax:
+
+ using Namespace;
+ using Namespace.SubNamespace;
+
+
+ The "using" must be appear at the top of compilation unit  (.cs) file and like Java, in C# we cannot use "TYPE" name   with using statement.
+
+    using System; // is valid
+    using System.Console; // invalid
+                 [Note: Console is a class]
+
+ However, we can create "aliases" for the TYPE name.
+
+
+ Syntax:
+
+  using alias = Namespace.TypeName;
+
+
+Local variable must be assigned/initialize before we use it.
+
+Example :
+
+using System;
+using cn = System.Console;
+
+class Test
+{
+    static void Main()
+    {
+        int no = 10;
+        System.Console.WriteLine(no);
+        Console.WriteLine("Value :" + no);
+        cn.WriteLine("Hello");
+    }
+}
+
+
+Literals/constants
+----------------------
+
+byte, sbyte, short, ushort, int, uint, long and ulong variables will uses decimal, octal or hexa-decimal contants.
+
+  e.g
+         int value = 0xff;
+
+To create long literal, use "L" or "l" suffix.
+
+    long amount = 100000l * 100000L;
+
+For float literal, use "F" or "f" suffix
+
+For decimal literal, use "m" or "M" suffix
+
+for double, assign fixed or scientific floating point value
+
+        double amount = 10.0;
+        float value = 10.0f;
+for boolean, use true or false
+
+for char, use single quote to embed single ANSI char 
+               e.g 'A'  '?'
+
+        or unicode value
+
+                '\uxxxx'  \u + four digit hexa value
+
+         char ch = '\u0B12';
+
+
+for string constant, double quote and @ (verbantim)    operator is used.
+
+  e.g
+
+  string name = "Mr. Abc";
+
+  @ verbantim operator escape the escape-sequence chars
+
+  string path = @"c:\new\block";
+      
+  @ operator also used to create multi-line string
+
+  string info = @"
+Hello,
+
+  How are you?
+
+Regards,
+ABC
+
+";
+
+
+Object, object reference
+========================================
+
+
+What will be the output?
+
+public class Test
+{
+   public int no;
+}
+
+class TestMain
+{
+  static void Main()
+   {
+      Test a = new Test();
+      Test b = a;
+
+       a.no = 10;
+       b.no = 20;
+       Console.WriteLine(a.no + " " + b.no);
+     }
+}
+
+
+Reference variable or object variable holds memory reference of an object or null.
+
+   Test a = null;  is valid 
+and
+   Test a = new Test();
+
+Reference variable of "class", "interface", "array" or "delegate" is 4 bytes long.
+   
+
+How to design a class -- Naming convention 
+----------------------------------------------
+
+1. Always create a TYPE in named namespace. In previous    example, we've create a TYPE in "global namespace".
+
+2. Use "Pascal" case naming pattern (capitalize the first    letter of each word) for Namespace, TypeName, Method,     Property name.
+
+3. Use "lowercase" or "camelCase" naming pattern to name    the "fields" or "local variables".
+
+
+
+Class members
+=================
+
+//Always use "public" modifier to create top-level types
+
+public class Student 
+{
+   //fields must be private
+   
+   int roll;            //default access is private 
+   private string name; 
+   private static string school;
+
+
+   //instance constructor
+
+   public Student(int roll, string name)
+   {
+      if(roll>=1 && roll<=100)
+        {
+           this.roll = roll;
+         }
+
+       this.name = name ==null ? "" : name;
+     }
+
+   public Student(String name,int roll) : 
+          this(roll,name) <-- To select another construct
+     {}                       of "same" class
+    
+   public Student(): this(0,"") {}
+ 
+   // static constructor
+   // cannot use "access" modifier -- it must be private
+   // and it will be called atmost once when we access any
+   // memeber of that class very first
+
+    static Student()
+     {
+        school = "The ABC School";
+      }
+
+   // Instance methods
+   // These methods also called "data-wrapper" or
+   // Data encapsulation methods
+   public int GetRoll() { return roll;}
+   public String GetName() { return name;}
+   public void SetRoll(int roll){ this.roll = roll;}
+   public void SetName(String name) { this.name = name;}
+
+   //static method
+   public static string GetSchool() { return school;}
+   public static void SetSchool(String school) { 
+       Student.school = school;
+   }
+
+    //Extra methods
+   public void Print()
+   {
+       string info = string.Format(@"
+Roll : {0}
+Name : {1}",roll,name);
+       Console.WriteLine(info);
+    }
+
+}
+   
+
+Code in Main method:
+
+  Student student = new Student(10,"Mr. A"); 
+  student.Print();
+  Console.WriteLine(Student.GetSchool()); //static method
+
+  
+Composition    
+=============
+
+class Subject{
+  string name;
+  int totalMarks;
+}
+class Exam{
+  Subject subject;
+  DateTime date;
+}
+
+class Student{
+  int roll;
+  String name;
+}
+class StudentExam{
+   Exam exam;
+   Student student;
+   int obtainMarks;
+}
+ 
+Subject math = new Subject("Maths",100);
+Subject eng = new Subject("English",100);
+
+Exam mathExam = new Exam(math,"1-1-2002");
+Exam engExam = new Exam(eng,"2-1-2002");
+
+Student raj = new Student(1,"Raj");
+Student man = new Student(2,"Man");
+
+StudentExam rajEng = new StudentExam(engExam,raj,90);
+StudentExam manEng = new StudentExam(engExam,man,70);
+
+
+

@@ -1,0 +1,186 @@
+Generic or Parameterized types
+
+-------------------------------------------------------------------
+
+ What is "Generic"?
+
+ ---------------------
+ To pass "TYPE Reference" to method , class, interface, delegate is  known as "Type" parameter or "Generic".
+
+ This is C# compiler feature which substitute the "symbol" by given "Type Reference".
+
+
+ Application of "Generic"
+ -------------------------
+
+ In some cases, some implementation of "TYPES" become costly or unmanagable becuase lack of knowledge or we don't want to type the same code again and again. These types are LinkedList, Stack, Tree (ie. data structure).
+
+  Suppose, we need to create a "int" linkedlist with all necessary   methods. After that "int linkedlist", we need another linkedlist of "Student" type. So in this case, we'll copy that "int" linkedlist, replace all "int" with "Student" --- and this approach might require additional attention because "Student" type is reference type.
+
+  Another common use of "Generic" to create "Bounded" TYPES.
+
+In short, to re-use the components by placing "types" while compiling code is known as "Generic".
+
+
+General Syntax:
+
+ for TYPES:
+
+    class ClassName<T> {} 
+or  class ClassName<T1,T2,..> {}
+    interface InterfaceName<T> {}
+
+ for methods:
+
+     T methodName<T>(T arg) { }
+
+In common practice, TYPE IDENTIFIERS should be upper-alphabet however you can choose any valid identifer.
+
+Example : Open type method parameter
+
+
+  static void Print<MyType>(MyType value)
+    {
+        Console.WriteLine(value);
+    }
+  static void Test<T,U>(T t, U u) {}
+
+    static void Main()
+    {
+        Print<float>(10.10f);
+        Print<int>(10);
+        Print<string>("Hello");
+
+        Test<int,float>(10,10.10f);
+    }
+
+Example : Open type
+
+class MyStack<T>
+{
+   T []items;
+   int index = 0;
+   public void Push(T item) { items[index++]=item; }
+   public T Pop() { return items[--index]; }
+}
+
+class MyPair<T1,T2>
+{
+  public T1 Key {get;set;}
+  public T2 Value {get;set;}
+}
+
+
+Code in Main method:
+
+ MyPair<String,int> info=new MyPair<String,int>();
+ info.Key = "Mehsana";
+ info.Value = 384001;
+
+ MyPair<String,int[]> marks = new MyPair<String,int[]>();
+
+ marks.Key = "Raj";
+ marks.Value = new int[]{ 55,66,77,88};
+
+
+Example: Create open type implementation
+
+In this sample, we want to create some "Business objects" having "standard" actions which are implemented from "Business" interface
+
+interface Business<T>
+{ 
+   void Add(T obj);
+   void Del(T obj);
+   T Get(T obj);
+   T[] GetAll();
+}
+
+class User { }
+class Emp {}
+
+
+class UserBao : Business<User>
+{
+   /* implemention of business methods */
+   public void Add(User obj) {}
+   public void Del(User obj) {}
+   public User Get(User obj) {}
+   public User[] GetAll() {}
+}
+and similarly, create the EmpBao.
+
+Generic constraints --- create open but bounded type parameter
+------------------------------------------------------------------
+
+If you wish to create such type parameter whose reference "must" be a class, interface or struct.
+
+Following syntax allow us to create open but bounded types.
+
+ <T> where T: interface
+ <T> where T: class or superclass
+ <T> where T: struct
+
+Or
+
+ <T,U> where T: class
+       where U: interface
+
+Ex:1
+
+class Data<T>
+{
+    public T Item { get; set; }
+}
+
+static void Main()
+ {
+        Data<int> no = new Data<int>();
+        Data<Data<int>> nnoo = new Data<Data<int>>();
+        nnoo.Item = new Data<int>();
+        nnoo.Item.Item = 20;
+    }
+
+Ex:2 
+class MyValue<T> where T: struct 
+{
+   public T Item {get;set;}
+}
+
+Main :
+     MyValue<string> s = new MyValue<string>(); //wont compile
+     MyValue<int> n = new MyValue<int>(); //OK
+     MyValue<bool> n = new MyValue<bool>(); //OK
+
+Ex3:
+class Person {}
+class Emp : Person {}
+class Student : Person{}
+
+class Animal{}
+class Cat: Animal{}
+class Learning<T> where T: Person {}
+class Training<T> where T: Animal {}
+
+class Friend<T1,T2> where T1: Person
+                    where T2: Dog
+{
+}
+
+Sub-class by extending open types
+--------------------------------------
+class Employees : LinkedList<Emp> {}
+
+   Which is equivalent to,
+
+LinkedList<Emp> list = new LinkedList<Emp>() but this will instantiate the LinkedList<Emp> where as, you can add other actions into "Employees" class.
+
+
+class BasicLearning : Learning<Student>
+{
+}
+
+class AdvancedLearning : Learning<Emp>{}
+
+
+     
+

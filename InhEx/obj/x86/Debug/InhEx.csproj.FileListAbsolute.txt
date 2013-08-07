@@ -1,0 +1,4 @@
+c:\csnet\Ajay\InhEx\bin\Debug\InhEx.exe
+c:\csnet\Ajay\InhEx\bin\Debug\InhEx.pdb
+c:\csnet\Ajay\InhEx\obj\x86\Debug\InhEx.exe
+c:\csnet\Ajay\InhEx\obj\x86\Debug\InhEx.pdb

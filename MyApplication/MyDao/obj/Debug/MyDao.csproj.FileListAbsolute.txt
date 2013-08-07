@@ -1,0 +1,5 @@
+C:\csnet\Ajay\MyApplication\MyDao\bin\Debug\MyDao.dll
+C:\csnet\Ajay\MyApplication\MyDao\bin\Debug\MyDao.pdb
+C:\csnet\Ajay\MyApplication\MyDao\obj\Debug\ResolveAssemblyReference.cache
+C:\csnet\Ajay\MyApplication\MyDao\obj\Debug\MyDao.dll
+C:\csnet\Ajay\MyApplication\MyDao\obj\Debug\MyDao.pdb
