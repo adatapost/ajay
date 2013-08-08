@@ -1,0 +1,7 @@
+c:\csnet\Ajay\CollectionAndControls\bin\Debug\CollectionAndControls.exe
+c:\csnet\Ajay\CollectionAndControls\bin\Debug\CollectionAndControls.pdb
+c:\csnet\Ajay\CollectionAndControls\obj\x86\Debug\CollectionAndControls.Form1.resources
+c:\csnet\Ajay\CollectionAndControls\obj\x86\Debug\CollectionAndControls.Properties.Resources.resources
+c:\csnet\Ajay\CollectionAndControls\obj\x86\Debug\CollectionAndControls.csproj.GenerateResource.Cache
+c:\csnet\Ajay\CollectionAndControls\obj\x86\Debug\CollectionAndControls.exe
+c:\csnet\Ajay\CollectionAndControls\obj\x86\Debug\CollectionAndControls.pdb
