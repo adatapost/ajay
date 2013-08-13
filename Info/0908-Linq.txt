@@ -1,0 +1,223 @@
+LINQ - Language Integrated Query
+=====================================================================
+C# language (compiler) has ability to read data from various data sources (including memory , database, XML, Json, and disk files), filter these data by adding conditions or critiaries and returns result.
+
+Prior to LINQ, only relational databases have such "language query" or "query language" to read & filter the data. (XQuery is example of query language to filter the XML data).
+
+C# language and .net framework LINQ API construct the "queries" from --- collections (memory), databases (ado.net), xml (XML parsers), Json (json parsers) and so many data sources.
+
+The LINQ framework and C# language uses any data source that has "IEnumerable<T>" or a type that implements IQueryable<T> interface.
+
+   Collection classes are IEnumerable<T> type where as other data sources including "Database", "XML" are IQueryable<T>.
+
+    The IQueryable<T> type define the way/method to fetch data from the     data sources.    
+
+
+The LINQ Statements
+=============================
+To construct the LINQ, we need to :
+
+ 1. Select or identify the data source
+ 2. Define the query using C# keywords or LINQ API methods
+    from, in, select, where, group by, orderby are C# keywords and        LINQ API has equivalent "Extension" methods of these keywords.
+
+ 3. Execute the query.
+
+    Query execution can be take place when you iterate using "foreach" and this kind of query execution is called "Defered Execution or late execution".
+
+     You can use "Extension" methods -- ToList, ToArray, Min, Max,      Count etc to "force" execution of "query".
+
+Example: Create strongly typed query --- save reference of query into IEnumerable<T>.
+
+       //1. Select or Identify the Datasource
+        int[] nos = { 22, 3, 1, 4, 5, -66, 7, 8, 44 };
+
+        //2. Define the query (LINQ) or expression
+        int m = 1;
+
+        IEnumerable<int> query = from no in nos
+                                 where no>m
+                                 select no;
+        //3. Execute the "query" or "expresion"
+        //   Deffered execution of query
+
+        m = 30;
+        foreach (var no in query)
+        {
+            Console.WriteLine(no);
+        }
+        m = 10;
+        foreach (var no in query)
+        {
+            Console.WriteLine(no);
+        }
+
+Example : Store query definition using "var" or "dynamic"
+
+      string[] cities = { "Meh", "Patan", "Rajkot", "surat" };
+      var query = from city in cities select city;
+      foreach(var city in query)
+           Console.WriteLine(city);
+
+Example: Returns anonymous object.
+
+         Syntax:
+                  select new
+                    { 
+                      Property1= value1,
+                      .....
+                     };
+ 
+      string[] cities = { "Meh", "Patan", "Rajkot", "surat" };
+       var query = from city in cities
+                    select new
+                        {
+                            City = city,
+                            UpperName  = city.ToUpper(),
+                            LowerName = city.ToLower(),
+                            Length = city.Length
+                        };
+        foreach (var city in query)
+            Console.WriteLine(city.City + " "+ city.Length + " " + city.UpperName);
+
+Example: Returns an object of existing type:
+
+          Syntax:
+                  select new ClassName
+                    {
+                      Prop1 = value1,
+                      Prop2 = value2,
+                      ...
+                      };
+
+public class Emp
+{
+    public string FirstName {get;set;}
+    public string LastName {get;set;}  
+    public string Dept {get;set;}
+ 
+    public static List<Emp> GetEmps()
+     {
+        return new List<Emp>()
+           {
+     new Emp() { FirstName = "Raj", LastName = "Patel", Dept = "Acc"},
+     new Emp() { FirstName = "Man", LastName = "Patel", Dept = "Prd"},
+     new Emp() { FirstName = "Ram", LastName = "Shah", Dept = "Acc"},
+            };
+       }
+}    
+public class Person
+{
+   public int Age {get;set;}
+   public string Name {get;set;}
+}
+
+code in Main:
+
+    var query = from emp in Emp.GetEmps()
+                  select new Person
+                      {
+                           Name = emp.FirstName + " " + emp.LastName
+                       };
+     foreach(var person in query)
+         Console.WriteLine(person.Name + " " + person.Age);
+
+Example: Sort an element
+
+    Syntax:
+           from e in elements
+              orderby e descending
+                 select e;
+
+       var query = from e in Emp.GetEmps()
+                    orderby e.Dept descending
+                    select e;
+
+        foreach (var e in query)
+            Console.WriteLine(e.FirstName + " " 
+               + e.LastName   + " " + e.Salary + " " + e.Dept);
+
+
+Example: group by example
+
+       Syntax:
+               from e in elements
+                  group e by e into group_label
+                      select group_label;
+
+        var query = from e in Emp.GetEmps()
+                    group e by e.Dept into deptGroup
+                    select deptGroup;
+
+        foreach (var dept in query)
+        {
+            Console.WriteLine(dept.Key);
+            foreach (var e in dept)
+            {
+                Console.WriteLine("\t" + e.FirstName + " " 
+                                       + e.LastName);
+            }
+        }   
+
+Note: by <expression>  will be a key and all "e" are added under the into <<expression>> -- called group or collection of "e". The into <<expression>> object contains a special property called "Key" which hold value of by <<expression>>. And into <<expression>> represent the List<T> of type "e" that belongs to  by <<expression>>.          
+ 
+                     
+Group examples:
+
+ string[] words = {"this","is","that","is","that","those","this","that" };
+
+        var query = from w in words
+                    group w by w into wordgrup
+                    select wordgrup;
+        foreach (var k in query)
+            Console.WriteLine(k.Key + "  : " + k.Count());
+
+        string str = "asbash hwejwewhewe";
+        var query1 = from c in str
+                    group c by c into gc
+                    select gc;
+        foreach (var k in query1)
+            Console.WriteLine(k.Key + "  : " + k.Count());
+
+        var query2 = from e in Emp.GetEmps()
+                     group e by e.Dept into g
+                     select g;
+        foreach (var d in query2)
+            Console.WriteLine(d.Key + " : " + d.Count() + "  : ");
+
+
+Joins - LINQ
+------------------------------------------------------------
+
+Two or more data-sources can be used with LINQ with following syntax:
+
+   var query =  from e1 in elements1
+                  from e2 in elements2
+                       ........
+                        where e1.expr == e2.expr
+                         select ...;
+
+
+Ex: We've List<Dept> and List<Emp> and "DeptName" is common in both Dept" and "Emp" type.
+   
+     To select all emp from List<Emp> whose "Dept" is exists in 
+     List<Dept>.
+
+      var query = from e in Emp.GetEmps()
+                    from d in Dept.GetDepts()
+                    where e.Dept == d.DeptName
+                    select e;
+        foreach (var e in query)
+        {
+            Console.WriteLine(e.FirstName + " "+ e.LastName);
+        }
+
+     To select all emp whose dept location is "Meh".
+     -----------------
+    
+     string city = "meh";
+    
+     var query = from e in Emp.GetEmps()
+                  from d in Dept.GetDepts()
+                    where e.Dept == d.DeptName && d.Location == city
+                       select e;

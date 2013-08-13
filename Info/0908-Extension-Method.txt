@@ -1,0 +1,77 @@
+Extension Methods
+============================================================
+
+The Extension method is compiler (C#) feature through which we can "add" method to an existing "type" without derived them or changing their source code.
+
+
+The "Extension" method can be created in any application type including library project or web/win application using following syntax:
+
+   1. Extension method must be placed into "static" and "public" class.
+
+   2. Access modifier of Extension method must be "public" and its       storage class must be "static".
+
+   3. First method parameter must be "TYPE" reference and syntax to specify first parameter must be :   this TypeName refVarName
+
+  Syntax:
+
+   public static class MyExtension <--- You can choose your own name
+    {
+        public static return_type  MethodName(this Type refvar, ...)
+         {
+            return ....;
+          }
+     }
+
+
+Example :
+
+public static class MyExtension
+{
+    public static int WordCount(this string str)
+    {
+        return str.Split(
+          new string[] { " ", "\n", "\t" },           StringSplitOptions.RemoveEmptyEntries
+          ).Length;
+    }
+    public static ValueType Square(this ValueType n)
+    {
+        return n;
+    }
+    public static int Sum(this int[] ar)
+    {
+        int s = 0;
+        foreach (var t in ar)
+            s = s + t;
+        return s;
+    }
+}
+
+Code in Main: 
+
+        string str = "The       re d         sun";
+        Console.WriteLine(str.WordCount());
+        int no = 10;
+        Console.WriteLine(no.Square());
+        decimal value = 1000;
+        Console.WriteLine(value.Square());
+
+        int[] ar = { 11, 22, 3, 4, 55 };
+        Console.WriteLine(ar.Sum());  
+
+The "Extension" method will be automatically "glued" to all sub-types including the 'type' itself.
+
+
+Example : Write extension method for "int" type called "AmountInWords()" which returns "amount in words".
+
+
+
+
+
+
+
+
+
+
+
+
+

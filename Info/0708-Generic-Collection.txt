@@ -159,3 +159,75 @@ class Product
     Unit
     Category category
 }
+
+
+The SortedSet<T> collection
+----------------------------------------------------------------
+Type parameter must implement the IComparable<T> interface in order to store elements.
+
+class Emp : IComparable<Emp>
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+   public int CompareTo(Emp other)
+    {
+        if (ID == other.ID) return 0;
+        if (ID > other.ID) return 1;
+        return -1;
+    }
+}
+
+class Test
+{
+    static void Main()
+    {
+        SortedSet<Emp> emps = new SortedSet<Emp>();
+        emps.Add(new Emp() { ID=1, Name="A" });
+        emps.Add(new Emp() { ID = 1, Name = "A" }); //wont insert
+        emps.Add(new Emp() { ID = 2, Name = "B" });
+
+        foreach (var emp in emps)
+            Console.WriteLine(emp.ID + " " + emp.Name);
+    }
+}
+
+Dictionary<K,V> 
+-------------------------------------------------------------
+The "Key" type must override "Equals" and "GetHashCode".
+
+ Dictionary<string, List<string>> country;
+ country = new Dictionary<string, List<string>>();
+
+        country.Add("India", new List<string>() {"Guj","Raj" });
+        country.Add("USA", new List<string>() { "Alb"});
+
+        country["USA"].Add("Ocl");
+        country["India"].Add("Mah");
+
+        foreach (var c in country)
+        {
+            Console.WriteLine(c.Key);
+            foreach (var s in c.Value)
+            {
+                Console.WriteLine("\t" + s);
+            }
+        }
+
+Example: Dictionary of "Student".
+
+
+class Students : Dictionary<int,Student>
+{
+   public void Add(int roll, Sring name)
+    {
+       if(!Contains(roll))
+         Add(roll, new Student(){ Roll = roll, Name = name });
+     }
+}
+
+code in Main:
+
+  Students students = new Students();
+  students.add(1,"Raj");
+  students.add(2,"Man");
+
