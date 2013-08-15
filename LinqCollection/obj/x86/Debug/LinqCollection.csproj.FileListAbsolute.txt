@@ -1,0 +1,5 @@
+C:\csnet\Ajay\LinqCollection\bin\Debug\LinqCollection.exe
+C:\csnet\Ajay\LinqCollection\bin\Debug\LinqCollection.pdb
+C:\csnet\Ajay\LinqCollection\obj\x86\Debug\LinqCollection.csprojResolveAssemblyReference.cache
+C:\csnet\Ajay\LinqCollection\obj\x86\Debug\LinqCollection.exe
+C:\csnet\Ajay\LinqCollection\obj\x86\Debug\LinqCollection.pdb

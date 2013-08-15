@@ -221,3 +221,89 @@ Ex: We've List<Dept> and List<Emp> and "DeptName" is common in both Dept" and "E
                   from d in Dept.GetDepts()
                     where e.Dept == d.DeptName && d.Location == city
                        select e;
+
+
+LINQ Extension methods
+=======================
+
+The namespace System.Linq contains "Extension" method that will replace the "LINQ" statements. In fact "extension" methods are created to helps the developer so he/she can perfrom "queries" by invoking methods and lambda expression.
+
+ The namespace System.Linq consists the "Collection" extensions. If you're interested in Database (SQL) or XML data-source queries then add reference of "System.Data.Linq" and "System.Xml.Linq" assemblies.
+
+
+ Where(Func<in_type,return_type>) -- It passes a delagate object to 					create LINQ definition.
+
+ Ex:
+  To select no > 20 from the list.
+
+        int[] nos = { 3, 4, 5, 66, 7, 88, 9 };
+
+        //Define the delegate ref
+        Func<int,bool> above20 = (x) => x >20;
+
+        //prepare query
+        var query = nos.Where(above20);
+
+        //Defered execution of query
+        foreach (var no in query)
+            Console.WriteLine(no);
+
+ To execute the query immediately, call the ToList(), ToArray(), Single(), SingleOrDefault(), First(), FirstOrDefault() method.
+
+        var int_array = nos.Where( (x)=> x>20 ).ToArray();
+        var int_list  = nos.Where( (x)=> x>20 ).ToList();        
+
+     
+Return no, square and cube of all nos > 20.
+
+         var result = nos.Where( (x)=> x>20 )
+                         .Select( (y) => new 
+                                {
+                                  No = y,
+                                  Square = y*y,
+                                  Cube = y * y * y
+                                 }).ToList();
+
+        foreach(var t in result){
+              Console.WriteLine(t.No + " " + t.Square + " " + t.Cube);
+         }
+
+OrderBy(), GroupBy() Method
+
+   foreach(var t in nos.OrderBy(x=>x))
+        Console.WriteLine(t);
+   foreach(var t in nos.GroupBy(x=>x))
+        Console.WriteLine(t.Key + " " + " " + t.Count() + " " 
+                           + t.Sum());
+ 
+Return sequence by skipping and selecting n elements. - Skip(int), Take(int).
+
+       var firstFive = nos.Take(5);
+        foreach (var t in firstFive)
+            Console.WriteLine(t);
+
+        foreach (var t in nos.Skip(5).Take(5))
+            Console.WriteLine(t);
+
+
+Query that returns "single" element -- First, Single, FirstOrDefault, SingleOrDefault.
+--------------------------------------------------------------------
+
+   XXXXXOrDefault() method returns an element if it is available or returns Default value of element type if sequence is empty.
+
+
+  Single() --- This method should be called when we expect single (one                and only one) element from the sequence.
+              It throws an exception when sequence is empty or sequence
+	       has two or more elements.
+
+ SingleOrDefault --- Same as Single() except it returns "default" value 			when an element is missing in sequence. 
+
+
+ First() --- This method should be called when we need very first              element from the sequence. (eg. Pickup the first record 		from the list sorted by Record-entryDate)
+              It throws an exception when sequence is empty.
+
+ FirstOrDefault() --- Same as "First()" but returns "default" value 		when sequence is empty. 
+
+[SingleOrDefault and FirstOrDefault cannot throws an exception when list/sequence is empty].
+
+ 

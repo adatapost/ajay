@@ -3,9 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class Test
+class ExtensionMethods
 {
     static void Main()
+    {
+      /*  int n = default(int);
+        Console.WriteLine(n);*/
+
+        int[] nos = { 11, 22, 33, 44 };
+
+        var value = nos.Where(x => x == 5).ToList();
+        Console.WriteLine(value.Count);
+
+        var value1 = nos.Where(x => x == 111).SingleOrDefault();
+
+    }
+    static void Main4()
+    {
+        int[] nos = { 2, 1, 2, 4, 5, 6, 7, 8, 9, 4, 5, 3, 5, 6, 2 };
+
+        var firstFive = nos.Take(5);
+        foreach (var t in firstFive)
+            Console.WriteLine(t);
+
+        foreach (var t in nos.Skip(5).Take(5))
+            Console.WriteLine(t);
+    }
+    static void Main3()
+    {
+        int[] nos = { 2, 1, 2, 4, 5, 6, 7, 8, 9, 4, 5, 3, 5, 6, 2 };
+
+        foreach (var t in nos.OrderBy(x => x))
+            Console.WriteLine(t);
+
+        var result = nos.GroupBy(x => x).ToList();
+        Console.WriteLine("-----");
+        foreach (var t in result)
+            Console.WriteLine(t.Key + " " + t.Count());
+
+
+    }
+    static void Main2()
+    {
+        int[] nos = { 3, 4, 5, 66, 7, 88, 9 };
+        var result = nos.Where((x) => x > 20)
+                         .Select((y) => new
+                         {
+                             No = y,
+                             Square = y * y,
+                             Cube = y * y * y
+                         }).ToList();
+
+        foreach (var t in result)
+        {
+            Console.WriteLine(t.No + " " + t.Square + " " + t.Cube);
+        }
+    }
+    static void Main1()
+    {
+        int[] nos = { 3, 4, 5, 66, 7, 88, 9 };
+
+        Func<int,bool> above20 = (x) => x >20;
+        var query = nos.Where(above20);
+        foreach (var no in query)
+            Console.WriteLine(no);
+    }
+}
+
+
+class Test
+{
+    static void Main8()
     {
         var query = from e in Emp.GetEmps()
                     from d in Dept.GetDepts()

@@ -1,0 +1,85 @@
+ADO.NET -- Core Database Integration API
+--------------------------------------------
+ 
+ADO.NET types falls into two groups:
+
+  1. DataSet classes Or Relational classes
+  
+  2. Provider classes
+
+  
+Provider classes are implementation of interfaces located at System.Data namespace.
+
+  for example,
+
+   Classes System.Data.SqlClient.SqlConnection
+           System.Data.OleDb.OleDbConnection
+           MySql.Data.MySqlConnection
+           Oracle.Data.OracleConnection are implementation of System.Data.IDbConnection interface.
+
+  If you're wish to write "portable" code that works for different databases then use "Interface" to handle the "database" operations.
+
+
+  For example:
+
+  public class MyDbClass
+  {
+     public static IDbConnection GetConnection()
+     {
+          IDbConnection cn = new SqlConnection(.....)
+                        //or new OracleConnection(....);
+          return cn;
+      }
+  }
+
+ ADO.NET resources and memory leaks
+ ---------------------------------------
+ ADO.NET providers are written using C# and may be C/C++ interface. Memory management feature of .net framework & garbage collector works only with "managed" code. To avoid memory leaks or dispose the ADO resources (objects) gracefully, some of the provider classes have "Dispose" method and this method "must" be called when associated "ADO" objects are no needed longer.
+
+  Following code will be consider "danger" because we have not called "Dispose" method.
+
+    SqlConnection cn = new SqlConnection();
+    cn.Open();
+     ....
+    cn.Close();
+
+ To dispose an object doesn't mean "release an object". To dispose an object means to tell the ADO provider to shutdown databases services which are used by a specific "object".
+
+
+Method - 1 : Dispose the db resources
+
+  SqlConnection cn = null;
+
+  try{
+     cn = new SqlConnection(...)
+
+   }catch(Exception ex){
+
+   }finally{
+      if(cn!=null) {
+         
+         cn.Dispose();
+       }
+    }
+
+Method -2  : using block
+
+  using(SqlConnection cn=new SqlConnection(....))
+   {
+     using(SqlCommand cmd = new SqlCommand(...))
+       {
+          //
+        }
+    }
+
+ The "using" block will call the "Dispose" method of "IDisposable"  classes even an exception is raised/throws or not.
+
+ Note: using block cannot be used with non-IDisposable classes. A class which implements IDisposable interface will be used in "using" block.
+
+ JavaSe7 -- try-with-resource syntax
+   try( Connection cn = DriverManager.getConnection(....)){
+      //
+    }catch(Exception ex){ }
+  [try-with-resource can be used by any class of java.lang.AutoClosable   interface] 
+
+
